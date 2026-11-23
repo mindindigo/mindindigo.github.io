@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>MindIndigo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f8f6fd;
+        --ink: #1c0f33;
+        --muted: #5d4f7a;
+        --brand: #3b1670;
+        --line: #e4dcf4;
+        --onbrand: #ffffff;
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px)
+      }
+
+      * {
+        box-sizing: border-box
+      }
+
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        scroll-behavior: smooth
+      }
+
+      body {
+        margin: 0;
+        border-top: 6px solid var(--brand);
+        background: var(--bg);
+        color: var(--ink);
+        font: 400 1.0625rem/1.6 'Instrument Sans', system-ui, sans-serif
+      }
+
+      a {
+        color: inherit
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--brand);
+        outline-offset: 3px
+      }
+
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 1.5rem
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0
+      }
+
+      .mark {
+        width: 2.25rem;
+        height: 2.25rem;
+        object-fit: contain;
+        mix-blend-mode: multiply
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        font: 600 1.25rem 'Fraunces', serif;
+        text-decoration: none
+      }
+
+      nav a {
+        margin-left: 1.5rem;
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 500
+      }
+
+      nav a:hover {
+        color: var(--ink)
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 3rem;
+        align-items: center;
+        padding: 4rem 0 6rem
+      }
+
+      h1 {
+        font: 600 clamp(2.6rem, 6vw, 4.6rem)/1.05 'Fraunces', serif;
+        letter-spacing: -.02em;
+        margin: 0 0 1.5rem
+      }
+
+      .lede {
+        font-size: 1.25rem;
+        color: var(--muted);
+        max-width: 34rem;
+        margin: 0 0 2rem
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--brand);
+        color: var(--onbrand);
+        padding: .85rem 1.5rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none
+      }
+
+      .btn.ghost {
+        background: none;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+        margin-left: .5rem
+      }
+
+      .big {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        animation: in 1.4s cubic-bezier(.2, .7, .2, 1) both
+      }
+
+      section {
+        padding: 5rem 0;
+        border-top: 1px solid var(--line)
+      }
+
+      h2 {
+        font: 600 clamp(1.8rem, 3.5vw, 2.6rem)/1.15 'Fraunces', serif;
+        letter-spacing: -.01em;
+        margin: 0 0 1rem;
+        max-width: 30rem
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 3rem
+      }
+
+      .two p {
+        margin: 0 0 1rem;
+        max-width: 36rem
+      }
+
+      .values {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2.5rem
+      }
+
+      .values h3 {
+        font: 600 1.25rem 'Fraunces', serif;
+        margin: 0 0 .4rem
+      }
+
+      .values p {
+        margin: 0;
+        color: var(--muted)
+      }
+
+      .empty {
+        margin-top: 2rem;
+        border: 2px dashed var(--line);
+        border-radius: 1.5rem;
+        background: var(--surface);
+        padding: 3.5rem 1.5rem;
+        text-align: center
+      }
+
+      .empty .mark {
+        display: block;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0 auto 1rem;
+        opacity: .5
+      }
+
+      .empty h3 {
+        font: 600 1.5rem 'Fraunces', serif;
+        margin: 0 0 .5rem
+      }
+
+      .empty p {
+        margin: 0 auto 1.5rem;
+        color: var(--muted);
+        max-width: 30rem
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 2.5rem 0;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: .95rem
+      }
+
+      @media(max-width:760px) {
+
+        .hero,
+        .two,
+        .values {
+          grid-template-columns: 1fr
+        }
+
+        .big {
+          max-width: 280px;
+          order: -1
+        }
+
+        nav a:not(.keep) {
+          display: none
+        }
+
+        .btn.ghost {
+          margin: .75rem 0 0
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="#top">
+          <img class="mark" src="images/logo.webp" alt="MindIndigo logo">MindIndigo </a>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#models">Models</a>
+          <a class="keep" href="#contact">Contact</a>
+          <a href="https://github.com/mindindigo">Github</a>
+          <a href="https://huggingface.co/MindIndigo">Huggingface</a>
+        </nav>
+      </header>
+      <main id="top">
+        <div class="hero">
+          <div>
+            <h1>AI built from the ground up.</h1>
+            <p class="lede">MindIndigo is an independent AI organization. We’re building our own models from scratch, starting with the foundations and sharing them when they’re ready.</p>
+            <a class="btn" href="#models">See our models</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+          <img class="big" src="images/logo.webp" alt="MindIndigo logo">
+        </div>
+        <section id="about">
+          <div class="two">
+            <h2>Why we’re starting from zero</h2>
+            <div>
+              <p>Most AI work builds on top of someone else’s foundation. MindIndigo is taking the longer road: designing, training and testing our own models end to end, so we understand every layer of what we release.</p>
+              <p>We’re early, and we’d rather be honest about that than overpromise.</p>
+            </div>
+          </div>
+          <div class="values">
+            <div>
+              <h3>Built, not borrowed</h3>
+              <p>Our models are developed in-house from the first line of code.</p>
+            </div>
+            <div>
+              <h3>Open about progress</h3>
+              <p>We’ll say what works, what doesn’t, and what’s still being figured out.</p>
+            </div>
+            <div>
+              <h3>Made to be useful</h3>
+              <p>Every model should solve a real problem for real people.</p>
+            </div>
+          </div>
+        </section>
+        <section id="models">
+          <h2>Models</h2>
+          <p style="color:var(--muted);margin:0">Everything we release will be listed here.</p>
+          <div class="empty">
+            <img class="mark" src="images/logo.webp" alt="">
+            <h3>No models yet</h3>
+            <p>Our first models are still in training. Get in touch and we’ll let you know when one is ready.</p>
+            <a class="btn" href="#contact">Get notified</a>
+          </div>
+        </section>
+        <section id="contact">
+          <div class="two">
+            <h2>Talk to us</h2>
+            <div>
+              <p>Interested in what we’re building, or want to collaborate? We’d like to hear from you.</p>
+              <a class="btn" href="https://github.com/orgs/mindindigo/discussions">MindIndigo Discussions</a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2026 MindIndigo</span>
+        <span>An AI organization.</span>
+      </footer>
+    </div>
+  </body>
+</html>
