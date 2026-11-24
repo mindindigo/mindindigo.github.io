@@ -201,6 +201,39 @@
         max-width: 30rem
       }
 
+      .model {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        margin-top: 2rem;
+        border: 1.5px solid var(--line);
+        border-radius: 1.5rem;
+        background: var(--surface);
+        padding: 2rem
+      }
+
+      .model .mark {
+        width: 3.5rem;
+        height: 3.5rem;
+        flex: none
+      }
+
+      .model h3 {
+        font: 600 1.5rem 'Fraunces', serif;
+        margin: 0 0 .25rem
+      }
+
+      .model p {
+        margin: 0 0 1rem;
+        max-width: 40rem
+      }
+
+      .model .meta {
+        color: var(--muted);
+        font-size: .95rem;
+        margin-bottom: .75rem
+      }
+
       footer {
         border-top: 1px solid var(--line);
         padding: 2.5rem 0;
@@ -231,6 +264,11 @@
 
         .btn.ghost {
           margin: .75rem 0 0
+        }
+
+        .model {
+          flex-direction: column;
+          padding: 1.5rem
         }
       }
     </style>
@@ -284,11 +322,14 @@
         <section id="models">
           <h2>Models</h2>
           <p style="color:var(--muted);margin:0">Everything we release will be listed here.</p>
-          <div class="empty">
+          <div class="model">
             <img class="mark" src="images/logo.webp" alt="">
-            <h3>No models yet</h3>
-            <p>Our first models are still in training. Get in touch and we’ll let you know when one is ready.</p>
-            <a class="btn" href="#contact">Get notified</a>
+            <div>
+              <h3>Indi1</h3>
+              <p class="meta">~1B parameters · Llama architecture · trained from scratch</p>
+              <p>Our first model. Trained from random initialisation on Shakespeare's complete works plus a large corpus of books and web text, then exported to GGUF for local use. It's a base model for completion, not an assistant, and it's early.</p>
+              <a class="btn" href="https://huggingface.co/MindIndigo/indi1">View on Hugging Face</a>
+            </div>
           </div>
         </section>
         <section id="contact">
