@@ -1,351 +1,781 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>MindIndigo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #ffffff;
-        --surface: #f8f6fd;
-        --ink: #1c0f33;
-        --muted: #5d4f7a;
-        --brand: #3b1670;
-        --line: #e4dcf4;
-        --onbrand: #ffffff;
-        color-scheme: light;
-        box-sizing: border-box;
-        padding-top: env(safe-area-inset-top, 0px);
-        padding-bottom: env(safe-area-inset-bottom, 0px)
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="MindIndigo is an independent AI organization building original AI models from the ground up.">
 
-      * {
-        box-sizing: border-box
-      }
+  <title>MindIndigo</title>
 
-      html {
-        scroll-padding-top: env(safe-area-inset-top, 0px);
-        scroll-behavior: smooth
-      }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-      body {
-        margin: 0;
-        border-top: 6px solid var(--brand);
-        background: var(--bg);
-        color: var(--ink);
-        font: 400 1.0625rem/1.6 'Instrument Sans', system-ui, sans-serif
-      }
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f6fd;
+      --ink: #1c0f33;
+      --muted: #5d4f7a;
+      --brand: #3b1670;
+      --line: #e4dcf4;
+      --onbrand: #ffffff;
+      --tint: #efe9fb;
 
-      a {
-        color: inherit
-      }
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
 
-      :focus-visible {
-        outline: 3px solid var(--brand);
-        outline-offset: 3px
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      .wrap {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 1.5rem
-      }
+    html {
+      scroll-padding-top: 2rem;
+      scroll-behavior: smooth;
+    }
 
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem 0
-      }
+    body {
+      margin: 0;
+      border-top: 6px solid var(--brand);
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1.0625rem/1.6 'Instrument Sans', system-ui, sans-serif;
+    }
 
-      .mark {
-        width: 2.25rem;
-        height: 2.25rem;
-        object-fit: contain;
-        mix-blend-mode: multiply
-      }
+    a {
+      color: inherit;
+    }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: .7rem;
-        font: 600 1.25rem 'Fraunces', serif;
-        text-decoration: none
+    :focus-visible {
+      outline: 3px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      gap: 1rem;
+    }
+
+    .mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font: 600 1.25rem 'Fraunces', serif;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: .95rem;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 4rem 0 6rem;
+    }
+
+    h1 {
+      font: 600 clamp(2.6rem, 6vw, 4.6rem)/1.05 'Fraunces', serif;
+      letter-spacing: -.02em;
+      margin: 0 0 1.5rem;
+    }
+
+    .lede {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin: 0 0 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--brand);
+      color: var(--onbrand);
+      padding: .85rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+
+    .btn:hover {
+      background: #51249a;
+      transform: translateY(-2px);
+    }
+
+    .btn.small {
+      padding: .6rem 1.2rem;
+      font-size: .95rem;
+    }
+
+    .btn.ghost {
+      background: none;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+      margin-left: .5rem;
+    }
+
+    .btn.ghost:hover {
+      background: var(--tint);
+    }
+
+    .big {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      animation: appear 1.4s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font: 600 clamp(1.8rem, 3.5vw, 2.6rem)/1.15 'Fraunces', serif;
+      letter-spacing: -.01em;
+      margin: 0 0 1rem;
+      max-width: 30rem;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+    }
+
+    .two p {
+      margin: 0 0 1rem;
+      max-width: 36rem;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .values h3 {
+      font: 600 1.25rem 'Fraunces', serif;
+      margin: 0 0 .4rem;
+    }
+
+    .values p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* Model families */
+
+    .families {
+      display: grid;
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .family {
+      border: 1.5px solid var(--line);
+      border-radius: 1.75rem;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .family-head {
+      background: var(--brand);
+      color: var(--onbrand);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .family-head::after {
+      content: "";
+      position: absolute;
+      right: -3rem;
+      bottom: -5rem;
+      width: 13rem;
+      height: 13rem;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.22);
+      box-shadow:
+        0 0 0 1.5rem rgba(255,255,255,.05),
+        0 0 0 3rem rgba(255,255,255,.04);
+    }
+
+    .family-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1rem;
+      background: rgba(255,255,255,.14);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .family-icon svg {
+      width: 2rem;
+      height: 2rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .family-info {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .family-info h3 {
+      font: 600 1.8rem/1.15 'Fraunces', serif;
+      margin: 0 0 .4rem;
+    }
+
+    .family-info p {
+      margin: 0;
+      font-size: .98rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,.82);
+      max-width: 38rem;
+    }
+
+    .family-count {
+      background: rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: .3rem .85rem;
+      font-size: .85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .family.alt .family-head {
+      background: #5a2ea6;
+    }
+
+    .family.alt2 .family-head {
+      background: #2b1052;
+    }
+
+    .family-body {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    }
+
+    /* Model cards */
+
+    .model {
+      background: var(--bg);
+      border: 1.5px solid var(--line);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .model:hover {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--tint);
+    }
+
+    .model-top {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .model-top .mark {
+      width: 2.5rem;
+      height: 2.5rem;
+      flex: none;
+    }
+
+    .model h4 {
+      font: 600 1.4rem 'Fraunces', serif;
+      margin: 0;
+      flex: 1;
+    }
+
+    .status {
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .2rem .65rem;
+      border-radius: 999px;
+      background: var(--tint);
+      color: var(--brand);
+      white-space: nowrap;
+    }
+
+    .model p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .chips span {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: .5rem;
+      padding: .1rem .55rem;
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+    .model .btn {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+
+    .planned {
+      border: 2px dashed var(--line);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .4rem;
+      background: transparent;
+    }
+
+    .planned strong {
+      font: 600 1.2rem 'Fraunces', serif;
+    }
+
+    .planned span {
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .family-placeholder {
+      border: 2px dashed var(--line);
+      border-radius: 1.75rem;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--bg);
+    }
+
+    .placeholder-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      background: var(--tint);
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .placeholder-icon svg {
+      width: 2rem;
+      height: 2rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .placeholder-info {
+      flex: 1;
+    }
+
+    .placeholder-info strong {
+      font: 600 1.25rem 'Fraunces', serif;
+    }
+
+    .placeholder-info p {
+      color: var(--muted);
+      margin: .25rem 0 0;
+      font-size: .98rem;
+    }
+
+    .placeholder-status {
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 0;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: .95rem;
+    }
+
+    @media(max-width: 900px) {
+      nav {
+        gap: .9rem;
       }
 
       nav a {
-        margin-left: 1.5rem;
-        text-decoration: none;
-        color: var(--muted);
-        font-weight: 500
+        font-size: .85rem;
       }
+    }
 
-      nav a:hover {
-        color: var(--ink)
+    @media(max-width: 760px) {
+      .hero,
+      .two,
+      .values {
+        grid-template-columns: 1fr;
       }
 
       .hero {
-        display: grid;
-        grid-template-columns: 1.1fr .9fr;
-        gap: 3rem;
-        align-items: center;
-        padding: 4rem 0 6rem
-      }
-
-      h1 {
-        font: 600 clamp(2.6rem, 6vw, 4.6rem)/1.05 'Fraunces', serif;
-        letter-spacing: -.02em;
-        margin: 0 0 1.5rem
-      }
-
-      .lede {
-        font-size: 1.25rem;
-        color: var(--muted);
-        max-width: 34rem;
-        margin: 0 0 2rem
-      }
-
-      .btn {
-        display: inline-block;
-        background: var(--brand);
-        color: var(--onbrand);
-        padding: .85rem 1.5rem;
-        border-radius: 999px;
-        font-weight: 600;
-        text-decoration: none
-      }
-
-      .btn.ghost {
-        background: none;
-        color: var(--ink);
-        border: 1.5px solid var(--line);
-        margin-left: .5rem
+        padding: 2rem 0 4rem;
       }
 
       .big {
-        width: 100%;
-        aspect-ratio: 1;
-        object-fit: contain;
-        mix-blend-mode: multiply;
-        animation: in 1.4s cubic-bezier(.2, .7, .2, 1) both
+        max-width: 280px;
+        order: -1;
+        margin: 0 auto;
+      }
+
+      nav a:not(.keep) {
+        display: none;
+      }
+
+      .btn.ghost {
+        margin: .75rem 0 0;
+      }
+
+      .family-head {
+        flex-wrap: wrap;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .family-info {
+        min-width: 0;
+      }
+
+      .family-count {
+        margin-left: 4.5rem;
+      }
+
+      .family-body {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+      }
+
+      .family-placeholder {
+        padding: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
       }
 
       section {
-        padding: 5rem 0;
-        border-top: 1px solid var(--line)
-      }
-
-      h2 {
-        font: 600 clamp(1.8rem, 3.5vw, 2.6rem)/1.15 'Fraunces', serif;
-        letter-spacing: -.01em;
-        margin: 0 0 1rem;
-        max-width: 30rem
-      }
-
-      .two {
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 3rem
-      }
-
-      .two p {
-        margin: 0 0 1rem;
-        max-width: 36rem
+        padding: 3.5rem 0;
       }
 
       .values {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin-top: 2.5rem
-      }
-
-      .values h3 {
-        font: 600 1.25rem 'Fraunces', serif;
-        margin: 0 0 .4rem
-      }
-
-      .values p {
-        margin: 0;
-        color: var(--muted)
-      }
-
-      .empty {
-        margin-top: 2rem;
-        border: 2px dashed var(--line);
-        border-radius: 1.5rem;
-        background: var(--surface);
-        padding: 3.5rem 1.5rem;
-        text-align: center
-      }
-
-      .empty .mark {
-        display: block;
-        width: 3.5rem;
-        height: 3.5rem;
-        margin: 0 auto 1rem;
-        opacity: .5
-      }
-
-      .empty h3 {
-        font: 600 1.5rem 'Fraunces', serif;
-        margin: 0 0 .5rem
-      }
-
-      .empty p {
-        margin: 0 auto 1.5rem;
-        color: var(--muted);
-        max-width: 30rem
-      }
-
-      .model {
-        display: flex;
         gap: 1.5rem;
-        align-items: flex-start;
-        margin-top: 2rem;
-        border: 1.5px solid var(--line);
-        border-radius: 1.5rem;
-        background: var(--surface);
-        padding: 2rem
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .model .mark {
-        width: 3.5rem;
-        height: 3.5rem;
-        flex: none
+      .big {
+        animation: none;
       }
 
-      .model h3 {
-        font: 600 1.5rem 'Fraunces', serif;
-        margin: 0 0 .25rem
+      .model,
+      .btn {
+        transition: none;
       }
+    }
+  </style>
+</head>
 
-      .model p {
-        margin: 0 0 1rem;
-        max-width: 40rem
-      }
+<body>
+  <div class="wrap">
 
-      .model .meta {
-        color: var(--muted);
-        font-size: .95rem;
-        margin-bottom: .75rem
-      }
+    <!-- Header -->
 
-      footer {
-        border-top: 1px solid var(--line);
-        padding: 2.5rem 0;
-        color: var(--muted);
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 1rem;
-        font-size: .95rem
-      }
+    <header>
+      <a class="brand" href="#top">
+        <img class="mark" src="images/logo.webp" alt="MindIndigo logo">
+        MindIndigo
+      </a>
 
-      @media(max-width:760px) {
+      <nav>
+        <a href="#about">About</a>
+        <a href="#models">Models</a>
+        <a class="keep" href="#contact">Contact</a>
+        <a href="https://github.com/mindindigo" target="_blank" rel="noopener">Github</a>
+        <a href="https://huggingface.co/MindIndigo" target="_blank" rel="noopener">Hugging Face</a>
+      </nav>
+    </header>
 
-        .hero,
-        .two,
-        .values {
-          grid-template-columns: 1fr
-        }
+    <main id="top">
 
-        .big {
-          max-width: 280px;
-          order: -1
-        }
+      <!-- Hero -->
 
-        nav a:not(.keep) {
-          display: none
-        }
+      <div class="hero">
+        <div>
+          <h1>AI built from the ground up.</h1>
 
-        .btn.ghost {
-          margin: .75rem 0 0
-        }
+          <p class="lede">
+            MindIndigo is an independent AI organization.
+            We're building our own models from scratch, starting
+            with the foundations and sharing them when they're ready.
+          </p>
 
-        .model {
-          flex-direction: column;
-          padding: 1.5rem
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <a class="brand" href="#top">
-          <img class="mark" src="images/logo.webp" alt="MindIndigo logo">MindIndigo </a>
-        <nav>
-          <a href="#about">About</a>
-          <a href="#models">Models</a>
-          <a class="keep" href="#contact">Contact</a>
-          <a href="https://github.com/mindindigo">Github</a>
-          <a href="https://huggingface.co/MindIndigo">Huggingface</a>
-        </nav>
-      </header>
-      <main id="top">
-        <div class="hero">
-          <div>
-            <h1>AI built from the ground up.</h1>
-            <p class="lede">MindIndigo is an independent AI organization. We’re building our own models from scratch, starting with the foundations and sharing them when they’re ready.</p>
-            <a class="btn" href="#models">See our models</a>
-            <a class="btn ghost" href="#contact">Get in touch</a>
-          </div>
-          <img class="big" src="images/logo.webp" alt="MindIndigo logo">
+          <a class="btn" href="#models">Explore our models</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
         </div>
-        <section id="about">
-          <div class="two">
-            <h2>Why we’re starting from zero</h2>
-            <div>
-              <p>Most AI work builds on top of someone else’s foundation. MindIndigo is taking the longer road: designing, training and testing our own models end to end, so we understand every layer of what we release.</p>
-              <p>We’re early, and we’d rather be honest about that than overpromise.</p>
-            </div>
+
+        <img class="big" src="images/logo.webp" alt="MindIndigo logo">
+      </div>
+
+      <!-- About -->
+
+      <section id="about">
+        <div class="two">
+          <h2>Why we're starting from zero</h2>
+
+          <div>
+            <p>
+              Most AI work builds on top of someone else's foundation.
+              MindIndigo is taking the longer road: designing, training
+              and testing our own models end to end, so we understand
+              every layer of what we release.
+            </p>
+
+            <p>
+              We're early, and we'd rather be honest about that than overpromise.
+            </p>
           </div>
-          <div class="values">
-            <div>
-              <h3>Built, not borrowed</h3>
-              <p>Our models are developed in-house from the first line of code.</p>
-            </div>
-            <div>
-              <h3>Open about progress</h3>
-              <p>We’ll say what works, what doesn’t, and what’s still being figured out.</p>
-            </div>
-            <div>
-              <h3>Made to be useful</h3>
-              <p>Every model should solve a real problem for real people.</p>
-            </div>
+        </div>
+
+        <div class="values">
+          <div>
+            <h3>Built, not borrowed</h3>
+            <p>Our models are developed in-house from the first line of code.</p>
           </div>
-        </section>
-        <section id="models">
-          <h2>Models</h2>
-          <p style="color:var(--muted);margin:0">Everything we release will be listed here.</p>
-          <div class="model">
-            <img class="mark" src="images/logo.webp" alt="">
-            <div>
-              <h3>Indi1</h3>
-              <p class="meta">~18M parameters · Llama architecture · trained from scratch</p>
-              <p>Our first model. Trained from random initialisation on Shakespeare's complete works, then exported to GGUF for local use. It's a base model for completion, not an assistant.</p>
-              <a class="btn" href="https://huggingface.co/MindIndigo/indi1">View on Hugging Face</a>
-            </div>
+
+          <div>
+            <h3>Open about progress</h3>
+            <p>We'll say what works, what doesn't, and what's still being figured out.</p>
           </div>
-        </section>
-        <section id="contact">
-          <div class="two">
-            <h2>Talk to us</h2>
-            <div>
-              <p>Interested in what we’re building, or want to collaborate? We’d like to hear from you.</p>
-              <a class="btn" href="https://github.com/orgs/mindindigo/discussions">MindIndigo Discussions</a>
-            </div>
+
+          <div>
+            <h3>Made to be useful</h3>
+            <p>Every model should solve a real problem for real people.</p>
           </div>
-        </section>
-      </main>
-      <footer>
-        <span>© 2026 MindIndigo</span>
-        <span>An AI organization.</span>
-      </footer>
-    </div>
-  </body>
+        </div>
+      </section>
+
+      <!-- Model Families -->
+
+      <section id="models">
+        <h2>Model families</h2>
+
+        <p style="color:var(--muted);margin:0">
+          Each family represents an independent series of models developed by MindIndigo.
+        </p>
+
+        <div class="families">
+
+          <!-- INDI FAMILY -->
+
+          <article class="family">
+
+            <div class="family-head">
+              <div class="family-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 3 8l9 5 9-5-9-5Z"/>
+                  <path d="m3 13 9 5 9-5"/>
+                  <path d="m3 17.5 9 5 9-5" opacity=".5"/>
+                </svg>
+              </div>
+
+              <div class="family-info">
+                <h3>Indi</h3>
+                <p>
+                  The original MindIndigo model family.
+                  A series of independently developed models trained from scratch.
+                </p>
+              </div>
+
+              <span class="family-count">1 released model</span>
+            </div>
+
+            <div class="family-body">
+
+              <!-- Indi1 -->
+
+              <div class="model">
+                <div class="model-top">
+                  <img class="mark" src="images/logo.webp" alt="MindIndigo">
+                  <h4>Indi1</h4>
+                  <span class="status">Released</span>
+                </div>
+
+                <div class="chips">
+                  <span>~18M parameters</span>
+                  <span>Llama architecture</span>
+                  <span>GGUF</span>
+                </div>
+
+                <p>
+                  Our first model. Trained from scratch on Shakespeare's
+                  complete works, then exported to GGUF for local use.
+                  A base model designed for text completion, not an assistant.
+                </p>
+
+                <a class="btn small"
+                   href="https://huggingface.co/MindIndigo/indi1"
+                   target="_blank" rel="noopener">
+                  View on Hugging Face
+                </a>
+              </div>
+
+              <!-- Future Indi models -->
+
+              <div class="planned">
+                <strong>Future Indi models</strong>
+                <span>
+                  More generations of the Indi family will be listed here
+                  as they are developed and released.
+                </span>
+              </div>
+
+            </div>
+          </article>
+
+          
+          <!-- MORE FAMILIES -->
+
+          <div class="family-placeholder">
+            <div class="placeholder-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
+
+            <div class="placeholder-info">
+              <strong>More families to come</strong>
+              <p>
+                New model families will be introduced as MindIndigo grows.
+              </p>
+            </div>
+
+            <span class="placeholder-status">Future releases</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Contact -->
+
+      <section id="contact">
+        <div class="two">
+          <h2>Talk to us</h2>
+
+          <div>
+            <p>
+              Interested in what we're building, or want to collaborate?
+              We'd like to hear from you.
+            </p>
+
+            <a class="btn"
+               href="https://github.com/orgs/mindindigo/discussions"
+               target="_blank" rel="noopener">
+              MindIndigo Discussions
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer>
+      <span>© 2026 MindIndigo</span>
+      <span>An independent AI organization.</span>
+    </footer>
+
+  </div>
+</body>
 </html>
